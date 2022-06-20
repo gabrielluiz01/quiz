@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const BoxQuestion = styled.div`
   width: 400px;
-  height: 150px;
+  min-height: 150px;
   margin-bottom: 30px;
   background-color: #130224;
   border-radius: 8px;

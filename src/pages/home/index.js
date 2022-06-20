@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../components/modal";
 import { varietyQuestion } from "../../mocks/variedades";
+import { geographyQuestion } from "../../mocks/geography";
 
 import { Container, BoxQuestion, BoxOptions, ButtonOptions } from "./style";
 
@@ -16,9 +17,24 @@ export default function Home({ step, setSucessModal, setErrorModal, setPage }) {
     }
   };
 
+  const theme = localStorage.getItem("theme");
+
+  console.log("theme", theme);
+
+  const questionTheme = () => {
+    switch (theme) {
+      case "Geografia":
+        return geographyQuestion;
+      case "Variedades":
+        return varietyQuestion;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Container>
-      {step >= varietyQuestion.length ? (
+      {step >= questionTheme().length ? (
         <Modal
           setPage={setPage}
           finished
@@ -28,13 +44,13 @@ export default function Home({ step, setSucessModal, setErrorModal, setPage }) {
       ) : (
         <>
           <BoxQuestion>
-            <h3>{varietyQuestion?.[step]?.question}</h3>
+            <h3>{questionTheme()?.[step]?.question}</h3>
           </BoxQuestion>
           <BoxOptions>
-            {varietyQuestion?.[step]?.options.map((item) => (
+            {questionTheme()?.[step]?.options.map((item) => (
               <ButtonOptions
                 onClick={() => responseQuestion(item)}
-                isCorrect={selectedOption === varietyQuestion?.[step]?.correct}
+                isCorrect={selectedOption === questionTheme()?.[step]?.correct}
               >
                 {item}
               </ButtonOptions>

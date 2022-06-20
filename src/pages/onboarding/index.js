@@ -19,6 +19,7 @@ export default function Onboarding({
 
   const handleTheme = (item) => {
     setSelectedTheme(item);
+    window.localStorage.setItem("theme", item.name);
     setPage("home");
   };
 
